@@ -3,6 +3,13 @@
 ![tests](https://github.com/GayaLahouazi/rl-robot-navigation/actions/workflows/tests.yml/badge.svg)
 ![python](https://img.shields.io/badge/python-3.11%2B-blue) ![pytorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c) ![gymnasium](https://img.shields.io/badge/Gymnasium-1.x-008080) ![license](https://img.shields.io/badge/license-MIT-green)
 
+**Key result:** PPO written from scratch reaches **90 % success on 200 maps never seen in training**
+(hand-designed potential field: 66 %), and stays ahead on denser maps (66 % vs 35 %).
+
+<p align="center"><img src="figures/demo.gif" width="420" alt="Trained PPO robot reaching goals on unseen maps"></p>
+<p align="center"><sub>Trained PPO policy on the first 4 held-out maps (not cherry-picked). Orange: the 16 lidar rays, green: the goal.
+Reproduce with <code>python make_gif.py</code>.</sub></p>
+
 A differential-drive robot with a 16-ray 2D lidar must reach a goal in an arena full of obstacles.
 **Every episode is a new random map**, so the robot cannot memorise a route: it has to learn a general
 reactive navigation behaviour. Two learning paradigms are compared on exactly the same task:
@@ -68,6 +75,7 @@ python -m pytest -q tests                                       # 5 tests, ~2 s
 python run_experiments.py --ppo-steps 1000000 --es-steps 3000000  # ~20 min on a laptop CPU
 ```
 Trained weights are in `models/` (`ppo.pt`, `cmaes.npy`); all numbers are written to `results/results.json`.
+`python make_gif.py` renders the animation above from `models/ppo.pt`.
 
 ## Limits and next steps
 
